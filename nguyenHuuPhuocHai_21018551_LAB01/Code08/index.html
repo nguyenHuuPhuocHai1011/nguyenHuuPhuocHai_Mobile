@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code08</title>
+    <script>
+         
+        function calcTip(bill) {
+            return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+        }
+
+        function calcAverage(arr) {
+            let sum = 0;
+            for (let i = 0; i < arr.length; i++) {
+                sum += arr[i];
+            }
+            return sum / arr.length;
+        }
+
+        function calculateTipsAndTotals() {
+            const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+
+            const tips = [];
+            const totals = [];
+
+            for (let i = 0; i < bills.length; i++) {
+                const tip = calcTip(bills[i]);
+                tips.push(tip);
+                totals.push(bills[i] + tip);
+            }
+
+            // Calculate the average total value
+            const averageTotal = calcAverage(totals);
+
+            // Output the results
+            document.getElementById('result').innerText = `
+                Bills: ${bills.join(', ')}\n
+                Tips: ${tips.map(tip => tip.toFixed(2)).join(', ')}\n
+                Totals: ${totals.map(total => total.toFixed(2)).join(', ')}\n
+                Average Total: ${averageTotal.toFixed(2)}
+            `;
+
+            console.log('Bills:', bills);
+            console.log('Tips:', tips);
+            console.log('Totals:', totals);
+            console.log('Average Total:', averageTotal);
+        }
+    </script>
+</head>
+<body onload="calculateTipsAndTotals()">
+    <h1>Tip Calculator with Loops</h1>
+    <p id="result"></p>
+</body>
+</html>

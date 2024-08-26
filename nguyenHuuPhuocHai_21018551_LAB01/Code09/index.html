@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code09</title>
+    <script>
+        function printForecast(arr) {
+            let forecastStr = '';
+
+            for (let i = 0; i < arr.length; i++) {
+                forecastStr += `... ${arr[i]}°C in ${i + 1} days `;
+            }
+            console.log(forecastStr + '...');
+            document.getElementById('result').innerText = forecastStr + '...';
+        }
+
+        function displayForecasts() {
+
+            const data1 = [17, 21, 23];
+            const data2 = [12, 5, -5, 0, 4];
+
+            console.log("Data 1:");
+            printForecast(data1);
+
+            console.log("Data 2:");
+            printForecast(data2);
+        }
+
+        
+    </script>
+</head>
+<body onload="displayForecasts()">
+    <h1>Temperature Forecast</h1>
+    <p>Check the console for the forecast results.</p>
+    <p id="result"></p>
+</body>
+</html>

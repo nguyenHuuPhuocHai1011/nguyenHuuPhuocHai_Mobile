@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        console.log("1. Numbers from 1 to 10:");
+        for (let i = 1; i <= 10; i++) {
+            console.log(i);
+        }
+
+        console.log("2. Odd numbers less than 100:");
+        for (let i = 1; i < 100; i += 2) {
+            console.log(i);
+        }
+
+        console.log("3. Multiplication table of 7:");
+        for (let i = 1; i <= 10; i++) {
+            console.log(`7 x ${i} = ${7 * i}`);
+        }
+
+        console.log("4. Multiplication tables from 1 to 10:");
+        for (let i = 1; i <= 10; i++) {
+            console.log(`Multiplication table of ${i}:`);
+            for (let j = 1; j <= 10; j++) {
+                console.log(`${i} x ${j} = ${i * j}`);
+            }
+        }
+
+        console.log("5. Sum of numbers from 1 to 10:");
+        let sum = 0;
+        for (let i = 1; i <= 10; i++) {
+            sum += i;
+        }
+        console.log(`Sum = ${sum}`);
+
+        console.log("6. Factorial of 10:");
+        let factorial = 1;
+        for (let i = 1; i <= 10; i++) {
+            factorial *= i;
+        }
+        console.log(`10! = ${factorial}`);
+
+        console.log("7. Sum of even numbers greater than 10 and less than 30:");
+        let evenSum = 0;
+        for (let i = 12; i < 30; i += 2) {
+            evenSum += i;
+        }
+        console.log(`Sum = ${evenSum}`);
+
+        function celsiusToFahrenheit(celsius) {
+            return (celsius * 9/5) + 32;
+        }
+        console.log("8. Convert Celsius to Fahrenheit:");
+        console.log(`30°C = ${celsiusToFahrenheit(30)}°F`);
+
+        function fahrenheitToCelsius(fahrenheit) {
+            return (fahrenheit - 32) * 5/9;
+        }
+        console.log("9. Convert Fahrenheit to Celsius:");
+        console.log(`86°F = ${fahrenheitToCelsius(86)}°C`);
+
+        function sumArray(arr) {
+            return arr.reduce((acc, num) => acc + num, 0);
+        }
+        console.log("10. Sum of numbers in an array:");
+        console.log(`Sum = ${sumArray([1, 2, 3, 4, 5])}`);
+
+        function averageArray(arr) {
+            return sumArray(arr) / arr.length;
+        }
+        console.log("11. Average of numbers in an array:");
+        console.log(`Average = ${averageArray([1, 2, 3, 4, 5])}`);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

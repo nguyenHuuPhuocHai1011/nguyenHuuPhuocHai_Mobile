@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code 06</title>
+    <script>
+        function calcTip(bill) {
+            return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+        }
+        function calculateTipsAndTotals() {
+            const bills = [125, 555, 44];
+            const tips = bills.map(calcTip);
+
+            const totals = bills.map((bill, index) => bill + tips[index]);
+
+            document.getElementById('result').innerText = `
+                Bills: ${bills.join(', ')}\n
+                Tips: ${tips.map(tip => tip.toFixed(2)).join(', ')}\n
+                Totals: ${totals.map(total => total.toFixed(2)).join(', ')}
+            `;
+
+            console.log('Bills:', bills);
+            console.log('Tips:', tips);
+            console.log('Totals:', totals);
+        }
+    </script>
+</head>
+<body onload="calculateTipsAndTotals()">
+    <h1>Tip Calculator with Arrays</h1>
+    <pre id="result"></pre>
+</body>
+</html>
