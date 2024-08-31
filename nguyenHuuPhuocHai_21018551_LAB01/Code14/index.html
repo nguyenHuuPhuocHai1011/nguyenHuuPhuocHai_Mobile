@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code14</title>
+    
+</head>
+<body >
+    <textarea id="text-input" rows="10" cols="30"></textarea>
+    <button id="convert-btn">Convert</button>
+    <pre id="output"></pre>
+
+<script>
+    document.getElementById('convert-btn').addEventListener('click', function() {
+        const text = document.getElementById('text-input').value;
+        const lines = text.split('\n');
+        let output = '';
+
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim().toLowerCase().split('_');
+            for (let j = 1; j < line.length; j++) {
+                line[j] = line[j][0].toUpperCase() + line[j].slice(1);
+            }
+            const camelCase = line.join('');
+            output += `${camelCase.padEnd(20)}${'✅'.repeat(i + 1)}\n`;
+        }
+
+        document.getElementById('output').textContent = output;
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code15</title>
+    
+</head>
+<body>
+    <button id="poll-btn">Trả lời thăm dò</button>
+    <script>
+        const poll = {
+            question: "Ngôn ngữ lập trình yêu thích của bạn là gì?",
+            options: ["0: JavaScript", "1: Python", "2: Rust", "3: C++"],
+            answers: new Array(4).fill(0),
+
+            registerNewAnswer() {
+
+                const answer = prompt(`${this.question}\n${this.options.join('\n')}\n(Viết số tùy chọn)`);
+                const parsedAnswer = parseInt(answer);
+                if (!isNaN(parsedAnswer) && parsedAnswer >= 0 && parsedAnswer < this.answers.length) {
+                    this.answers[parsedAnswer]++;
+                } else {
+                    alert('Đầu vào không hợp lệ! Vui lòng nhập một số tùy chọn hợp lệ.');
+                }
+                this.displayResults('string');
+            },
+
+            displayResults(type = 'array') {
+                if (type === 'string') {
+                    console.log(`Kết quả thăm dò ý kiến là ${this.answers.join(', ')}`);
+                } else if (type === 'array') {
+                    console.log(this.answers);
+                }
+            }
+        };
+
+        document.getElementById('poll-btn').addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+        poll.displayResults.call({answers: [5, 2, 3]}, 'string'); 
+        poll.displayResults.call({answers: [1, 5, 3, 9, 6, 1]}, 'array');  
+
+    </script>
+</body>
+</html>

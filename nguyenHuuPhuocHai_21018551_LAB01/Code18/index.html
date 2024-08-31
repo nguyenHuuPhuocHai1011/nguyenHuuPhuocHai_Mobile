@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code18</title>
+</head>
+<body>
+    <h1>Convert Dog Ages to Human Ages</h1>
+    <label for="dog-ages">Enter dog's ages (comma-separated):</label>
+    <input type="text" id="dog-ages" placeholder="e.g.">
+    
+    <button id="convert-btn">Convert Ages</button>
+
+    <script>
+        function calcAverageHumanAge(ages) {
+            const humanAges = ages.map(age => age <= 2 ? 2 * age : 16 + age * 4);
+            const adultHumanAges = humanAges.filter(age => age >= 18);
+            const averageHumanAge = adultHumanAges.reduce((sum, age) => sum + age, 0) / adultHumanAges.length || 0;
+            console.log(`Average human age of adult dogs: ${averageHumanAge.toFixed(2)}`);
+        }
+        document.getElementById('convert-btn').addEventListener('click', function() {
+            const dogAgesInput = document.getElementById('dog-ages').value;
+            const dogAges = dogAgesInput.split(',').map(num => parseInt(num.trim(), 10));
+            calcAverageHumanAge(dogAges);
+        });
+        console.log('Test Data 1:');
+        calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+
+        console.log('Test Data 2:');
+        calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+    </script>
+</body>
+</html>
