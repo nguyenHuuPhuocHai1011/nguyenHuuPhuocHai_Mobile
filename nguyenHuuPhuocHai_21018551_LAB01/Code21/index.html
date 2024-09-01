@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code21</title>
+</head>
+<body>
+
+    <script>
+        class CarCl {
+            constructor(make, speed) {
+                this.make = make;
+                this.speed = speed;
+            }
+
+            accelerate() {
+                this.speed += 10;
+                console.log(`${this.make} going at ${this.speed} km/h`);
+            }
+
+            brake() {
+                this.speed -= 5;
+                console.log(`${this.make} going at ${this.speed} km/h`);
+            }
+
+            get speedUS() {
+                return this.speed / 1.6;
+            }
+
+            set speedUS(speed) {
+                this.speed = speed * 1.6;
+            }
+        }
+        const car1 = new CarCl('Ford', 120);
+        car1.accelerate();
+        car1.brake();
+
+        console.log(`The current speed of ${car1.make} in mi/h: ${car1.speedUS}`);
+        car1.speedUS = 50;
+        console.log(`The new speed of ${car1.make} after set speedUS: ${car1.speed} km/h`);
+    </script>
+</body>
+</html>

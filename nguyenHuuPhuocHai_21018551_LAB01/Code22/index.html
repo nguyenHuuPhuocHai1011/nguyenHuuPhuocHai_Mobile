@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code22</title>
+</head>
+<body>
+    <script>
+        function Car(make, speed) {
+            this.make = make;
+            this.speed = speed;
+        }
+
+        Car.prototype.accelerate = function() {
+            this.speed += 10;
+            console.log(`${this.make} going at ${this.speed} km/h`);
+        };
+
+        Car.prototype.brake = function() {
+            this.speed -= 5;
+            console.log(`${this.make} going at ${this.speed} km/h`);
+        };
+
+        function EV(make, speed, charge) {
+            Car.call(this, make, speed);
+            this.charge = charge;
+        }
+
+        EV.prototype = Object.create(Car.prototype);
+        EV.prototype.chargeBattery = function(chargeTo) {
+            this.charge = chargeTo;
+        };
+        EV.prototype.accelerate = function() {
+            this.speed += 20;
+            this.charge -= 1;
+            console.log(`${this.make} going at ${this.speed} km/h, with battery is ${this.charge}%`);
+        };
+
+        const ev1 = new EV('Tesla', 120, 23);
+        ev1.accelerate(); 
+        ev1.brake(); 
+        ev1.chargeBattery(90); 
+        console.log(`The current battery of ${ev1.make}: ${ev1.charge}%`);
+        ev1.accelerate(); 
+    </script>
+</body>
+</html>
