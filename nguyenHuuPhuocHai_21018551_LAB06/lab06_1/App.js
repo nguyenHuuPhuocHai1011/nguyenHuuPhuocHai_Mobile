@@ -122,7 +122,7 @@ const App = () => {
         <Text style = {{margin : 10}}>Bạn có thắc mắc với sản phẩm vừa xem đừng ngại chát với shop!</Text>
       </View>
       <FlatList
-        data={item}
+        data={DATA}
         renderItem={renderItem}
         keyExtractor={item => item.id}
         extraData={selectedId}
