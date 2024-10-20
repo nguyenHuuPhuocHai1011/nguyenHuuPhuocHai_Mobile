@@ -1,4 +1,4 @@
-import React , { useState, useEffect } from "react";
+import React , { useState, useEffect, Alert } from "react";
 import {Text, View, Image, Button, TouchableOpacity, StyleSheet, TextInput, FlatList} from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -25,7 +25,7 @@ import { Entypo, AntDesign, Feather, MaterialIcons } from '@expo/vector-icons';
 //   },
 // ]
 
-const Item = ({item}) => {
+const Item = ({item, onEdit}) => {
   return (
     <View style = {styles.taskContainer}>
         <TouchableOpacity style = {styles.checkbox} 
@@ -39,7 +39,7 @@ const Item = ({item}) => {
         </Text>
 
         <TouchableOpacity style = {{marginLeft : 10}} 
-            
+            onPress = {onEdit}
         >
             <Entypo name="edit" size={24} color="red" />
         </TouchableOpacity>
@@ -112,33 +112,24 @@ function DetailsScreen({ navigation, route }) {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchTasks = async () => {
-    try {
-      const response = await fetch('https://67038f17ab8a8f8927309d88.mockapi.io/lab07_1');
-      const data = await response.json();
-      setTasks(data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchTasks();
+    fetch('https://67038f17ab8a8f8927309d88.mockapi.io/lab07_1')
+      .then(response => response.json())
+      .then(data => {
+        setTasks(data);
+      })
+      .catch(error => console.error(error))
+      .finally(() => setLoading(false));
   }, [refresh]);
 
-  const renderItem = ({item}) =>{
+  const renderItem = ({ item }) => {
     return (
       <Item
         item={item}
-        onPress={() => {
-          setSelectedId(item.id);
-        }}
+        onEdit={() => navigation.navigate('EditDelete', { id: item.id, currentTitle: item.title })}
       />
     );
-  }
-
+  };
     return (
       <View style = {styles.container}>
 
@@ -162,7 +153,7 @@ function DetailsScreen({ navigation, route }) {
 
                 <View >
                   <Text style = {{fontSize : 20}}>Hi {userName}</Text>
-                  <Text>Have agrate day a head</Text>
+                  <Text>Have a grate day a head</Text>
 
                 </View>
               </View>
@@ -179,7 +170,7 @@ function DetailsScreen({ navigation, route }) {
               }}
               
               placeholder = "Search"
-              ></TextInput>
+              />
           </View>
 
           <View style={{ flex: 5 }}>
@@ -329,6 +320,101 @@ function AddScreen({ navigation, route }) {
   
 }
 
+function EditDeleteScreen({ navigation, route }) {
+  const { id, currentTitle } = route.params;
+  const [jobTitle, setJobTitle] = useState(currentTitle);
+  const [error, setError] = useState('');
+
+  const updateJobInAPI = async () => {
+    try {
+      const response = await fetch(`https://67038f17ab8a8f8927309d88.mockapi.io/lab07_1/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title: jobTitle }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update job');
+      }
+
+      console.log('Job updated:', jobTitle);
+      navigation.navigate('Details', { refresh: true });
+    } catch (error) {
+      console.error(error);
+      setError('Có lỗi xảy ra khi cập nhật công việc.');
+    }
+  };
+
+  const deleteJobFromAPI = async () => {
+    try {
+      const response = await fetch(`https://67038f17ab8a8f8927309d88.mockapi.io/lab07_1/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete job');
+      }
+
+      console.log('Job deleted:', id);
+      navigation.navigate('Details', { refresh: true });
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Có lỗi xảy ra khi xóa công việc.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+    <View >
+                <TouchableOpacity
+                
+                onPress = {() => navigation.goBack()}
+                >
+                  <AntDesign name="arrowleft" size={24} color="black" style = {{top : 10,}} />
+                </TouchableOpacity>
+              </View>
+      <View style={{ flex: 1, justifyContent: 'space-between', }}>
+        <Text style={{ fontSize: 20, marginBottom: 20, marginTop : 20, }}>Edit Job</Text>
+
+        <TextInput
+          style={{
+            borderWidth: 1, borderRadius: 5, borderColor: 'gray',
+            height: 40, marginBottom: 20,
+          }}
+          placeholder="Job Title"
+          value={jobTitle}
+          onChangeText={setJobTitle}
+        />
+
+        {error ? <Text style={{ color: 'red' }}>{error}</Text> : null}
+
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20 }}>
+          <TouchableOpacity style={{
+            backgroundColor: 'rgba(0, 189, 214, 1)',
+            justifyContent: 'center', alignItems: 'center',
+            padding: 10, borderRadius: 5
+          }}
+            onPress={updateJobInAPI}
+          >
+            <Text style={{ color: 'white' }}>Update Job</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{
+            backgroundColor: 'rgba(255, 0, 0, 1)',
+            justifyContent: 'center', alignItems: 'center',
+            padding: 10, borderRadius: 5
+          }}
+            onPress={deleteJobFromAPI}
+          >
+            <Text style={{ color: 'white' }}>Delete Job</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
+}
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -339,7 +425,8 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Details" component={DetailsScreen} options={{headerShown : false}} />
         <Stack.Screen name="Add" component={AddScreen} options={{headerShown : false}} />
-      </Stack.Navigator>
+        <Stack.Screen name="EditDelete" component={EditDeleteScreen} options={{headerShown : false}} />
+        </Stack.Navigator>
 
     </NavigationContainer>
   );
