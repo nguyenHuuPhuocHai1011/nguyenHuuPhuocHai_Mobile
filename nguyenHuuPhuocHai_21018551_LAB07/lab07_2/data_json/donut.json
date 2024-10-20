@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Tasty Donut",
+    "small_title": "Spicy tasty donut family",
+    "price": 97,
+    "delivery_time": 39,
+    "restaurants_info": "Order a Large Pizza but the size is the equivalent of a medium/small from other places at the same price range.",
+    "quantity": 1,
+    "img": "https://loremflickr.com/640/480/food",
+    "id": "1"
+  },
+  {
+    "title": "Pink Donut",
+    "small_title": "Spicy tasty donut family",
+    "price": 70,
+    "delivery_time": 56,
+    "restaurants_info": "Order a Large Pizza but the size is the equivalent of a medium/small from other places at the same price range.",
+    "quantity": 1,
+    "img": "https://loremflickr.com/640/480/food",
+    "id": "2"
+  },
+  {
+    "title": "Floating Donut",
+    "small_title": "Spicy tasty donut family",
+    "price": 30,
+    "delivery_time": 25,
+    "restaurants_info": "Order a Large Pizza but the size is the equivalent of a medium/small from other places at the same price range.",
+    "quantity": 1,
+    "img": "https://loremflickr.com/640/480/food",
+    "id": "3"
+  },
+  {
+    "title": "Red Donut",
+    "small_title": "Spicy tasty donut family",
+    "price": 61,
+    "delivery_time": 87,
+    "restaurants_info": "Order a Large Pizza but the size is the equivalent of a medium/small from other places at the same price range.",
+    "quantity": 1,
+    "img": "https://loremflickr.com/640/480/food",
+    "id": "4"
+  },
+  {
+    "title": "Sweet Donut",
+    "small_title": "Spicy tasty donut family",
+    "price": 35,
+    "delivery_time": 29,
+    "restaurants_info": "Order a Large Pizza but the size is the equivalent of a medium/small from other places at the same price range.",
+    "quantity": 28,
+    "img": "https://loremflickr.com/640/480/food",
+    "id": "5"
+  }
+]
